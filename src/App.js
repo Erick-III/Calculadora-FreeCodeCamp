@@ -22,7 +22,7 @@ function generarBotonesCalculadora(agregarInput, calcularResultado) {
     if ((i < 12) && (i % 4)) {
       botonBase = <Boton manejarClic={agregarInput}>{numBoton}</Boton>
       numBoton++;
-    } else if (i == 13) {
+    } else if (i === 13) {
       for (let j = 0; j < operadoresFinales.length; j++) {
         if (operadoresFinales[j] === "=") {
           botonBase = <Boton manejarClic={calcularResultado} >{operadoresFinales[j]}</Boton>;
@@ -42,6 +42,9 @@ function generarBotonesCalculadora(agregarInput, calcularResultado) {
           break;
         case 12:
           operador = OPERADOR_MULT;
+          break;
+        default:
+          console.log("Def");
       }
       botonBase = <Boton manejarClic={agregarInput}>{operador}</Boton>
     }
@@ -49,7 +52,7 @@ function generarBotonesCalculadora(agregarInput, calcularResultado) {
     if (i <= 12) {
       botones.push(botonBase);
     }
-    if (!(i % 4) || i == 13) {
+    if (!(i % 4) || i === 13) {
       contenedorBotones.push(<div className='fila'>{botones}</div>);
       botones = [];
     }
@@ -63,14 +66,14 @@ function App() {
 
   const agregarInput = val => {
     let operacionInvalida = false;
-    if (val != '=') {
+    if (val !== '=') { 
       if(esOperador(val)){
         operacionInvalida = esOperador(input.toString().split("")[input.length-1]);
       }
 
       if (!operacionInvalida) {
         console.log("1", val, input);
-        if (input == "Error" || input == "Infinity" || input.toString() == "NaN") {
+        if (input === "Error" || input === "Infinity" || input.toString() === "NaN") {
           setInput(val.toString());
         } else {
           setInput(input + val.toString());
@@ -86,7 +89,7 @@ function App() {
   const esOperador = caracter => {
     let esRepetido = false;
     for (let i = 0; i < operadoresFinales.length; i++) {
-      if( operadoresFinales[i]!=0 && caracter == operadoresFinales[i]){
+      if( operadoresFinales[i]!==0 && caracter === operadoresFinales[i]){
         console.log("es repetido");
         esRepetido = true;
         i=operadoresFinales.length;
@@ -103,7 +106,7 @@ function App() {
     } else {
       resultado = evaluate(input.toString());
       console.log(resultado);
-      if (resultado.toString() == "Infinity" || resultado.toString() == "NaN") {
+      if (resultado.toString() === "Infinity" || resultado.toString() === "NaN") {
         alert("Error al dividir por cero");
       } else if (input && !isNaN(input[input.length - 1])) {
         setInput(evaluate(input.toString()));
