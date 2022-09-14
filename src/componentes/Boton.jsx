@@ -5,7 +5,7 @@ function Boton(props){
     
     const esOperador = valor =>{
         //isNaN verifica si es un numero
-        return (isNaN(valor) && (valor != '.') && (valor != '='));
+        return (isNaN(valor) && (valor !== '.') && (valor !== '='));
     };
     
     //children agarra los valores interios del componente en App.js
