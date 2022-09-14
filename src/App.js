@@ -89,7 +89,7 @@ function App() {
   const esOperador = caracter => {
     let esRepetido = false;
     for (let i = 0; i < operadoresFinales.length; i++) {
-      if( operadoresFinales[i]!==0 && caracter === operadoresFinales[i]){
+      if( operadoresFinales[i]!=="0" && caracter === operadoresFinales[i]){
         console.log("es repetido");
         esRepetido = true;
         i=operadoresFinales.length;
